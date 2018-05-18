@@ -1,0 +1,5 @@
+lambda_functions:
+- function_name: HelloWorld
+  handler: HelloWorld.main
+  runtime: python2.7
+  lambda_code: C:\Users\aakokje\Documents\cambia\aws_sam_exercise\test\tests\inputs\my_lambda.py

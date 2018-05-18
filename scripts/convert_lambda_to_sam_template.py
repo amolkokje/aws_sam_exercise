@@ -14,8 +14,9 @@ There are two ways to use this script:
     output_file_path = convert_lambda_to_sam_template(input_file_path)
 """
 import os
-import yaml
 import time
+import yaml
+import zipfile
 from optparse import OptionParser
 
 AWS_TEMPLATE_FORMAT_VERSION = '2010-09-09'
@@ -24,12 +25,13 @@ DESCRIPTION = 'SAM Template generated via automation'
 TYPE = 'AWS::Serverless::Function'
 
 def convert_lambda_to_sam_template(input_filepath):
-    assert os.path.exists(options.input_filepath), 'Input File Path {0} does not exist!'
+    assert os.path.exists(input_filepath), 'Input File Path {0} does not exist!'.format(input_filepath)
 
     output_dirname = os.path.join(os.path.dirname(input_filepath), 'outputs')
     output_filename = ''.join([os.path.basename(input_filepath).split('.')[0], '_sam.yaml'])
     output_filepath = os.path.join(output_dirname, output_filename)
-    os.makedirs(output_dirname)
+    if not os.path.exists(output_dirname):
+        os.makedirs(output_dirname)
 
     with open(input_filepath, 'r') as fh:
         input_yaml_data = yaml.load(fh.read())
@@ -47,17 +49,22 @@ def convert_lambda_to_sam_template(input_filepath):
     this code works for real scenarios, I am assuming that the lambda package needs to be created by this script. So
     I have added checks to ensure that the python file specified in the input YAML exists and if it does, zip it to
     specify as CodeUri in the output SAM template.
+    Assumption: We make sure that the file has the required handler/method.
     """
     for function in lambda_function_list:
-        # check if the python file exists
-        # create a zip containing the python file - CodeUri
+        lambda_code = function['lambda_code']
+        assert os.path.exists(lambda_code), 'Lambda code file {0} does not exist!'.format(lambda_code)
+        code_uri_file = ''.join([lambda_code.split('.')[0], '.zip'])
+        with zipfile.ZipFile(code_uri_file, 'w') as myzip:
+            myzip.write(lambda_code)
 
         sam_template_yaml['Resources'][function['function_name']] = {'Type': TYPE,
                                                                      'Properties': {'Handler': function['handler'],
                                                                                     'Runtime': function['runtime'],
-                                                                                    'CodeUri': 'bundle.zip'}} # ??
+                                                                                    'CodeUri': code_uri_file}}
     with open(output_filepath, 'w') as fh:
         yaml.dump(sam_template_yaml, fh, default_flow_style=False)
+    return output_filepath
 
 if __name__ == '__main__':
     parser = OptionParser()
@@ -65,3 +72,4 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     if not options.input_filepath:
         raise RuntimeError('Mandatory input parameter -i is required!')
+    convert_lambda_to_sam_template(options.input_filepath)
