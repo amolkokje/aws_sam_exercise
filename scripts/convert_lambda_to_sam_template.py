@@ -55,8 +55,10 @@ def convert_lambda_to_sam_template(input_filepath):
         lambda_code = function['lambda_code']
         assert os.path.exists(lambda_code), 'Lambda code file {0} does not exist!'.format(lambda_code)
         code_uri_file = ''.join([lambda_code.split('.')[0], '.zip'])
-        with zipfile.ZipFile(code_uri_file, 'w') as myzip:
-            myzip.write(lambda_code)
+        # TODO - converting to zipfile not working properly
+        # Assumption - zip file exists with python code
+        #with zipfile.ZipFile(code_uri_file, 'w') as myzip:
+        #    myzip.write(lambda_code)
 
         sam_template_yaml['Resources'][function['function_name']] = {'Type': TYPE,
                                                                      'Properties': {'Handler': function['handler'],

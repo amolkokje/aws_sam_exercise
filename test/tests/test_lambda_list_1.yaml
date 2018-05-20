@@ -1,9 +1,0 @@
-lambda_functions:
-- function_name: HelloWorld
-  handler: HelloWorld.main
-  runtime: python2.7
-  lambda_code: C:\Users\aakokje\Documents\cambia\aws_sam_exercise\test\tests\inputs\my_lambda.py
-- function_name: HelloWorld2
-  handler: HelloWorld2.main
-  runtime: python2.7
-  lambda_code: C:\Users\aakokje\Documents\cambia\aws_sam_exercise\test\tests\inputs\my_lambda2.py
