@@ -25,6 +25,11 @@ DESCRIPTION = 'SAM Template generated via automation'
 TYPE = 'AWS::Serverless::Function'
 
 def convert_lambda_to_sam_template(input_filepath):
+    """
+    converts function list to SAM template
+    :param input_filepath: absolute path of input file
+    :return:
+    """
     assert os.path.exists(input_filepath), 'Input File Path {0} does not exist!'.format(input_filepath)
 
     output_dirname = os.path.join(os.path.dirname(input_filepath), 'outputs')
@@ -52,13 +57,12 @@ def convert_lambda_to_sam_template(input_filepath):
     Assumption: We make sure that the file has the required handler/method.
     """
     for function in lambda_function_list:
-        lambda_code = function['lambda_code']
+        lambda_code = os.path.join(os.getcwd(), function['lambda_code'])
         assert os.path.exists(lambda_code), 'Lambda code file {0} does not exist!'.format(lambda_code)
+        lambda_zip = ''.join([function['lambda_code'].split('.')[0], '.zip'])
+        with zipfile.ZipFile(lambda_zip, 'w') as myzip:
+            myzip.write(function['lambda_code'])
         code_uri_file = ''.join([lambda_code.split('.')[0], '.zip'])
-        # TODO - converting to zipfile not working properly
-        # Assumption - zip file exists with python code
-        #with zipfile.ZipFile(code_uri_file, 'w') as myzip:
-        #    myzip.write(lambda_code)
 
         sam_template_yaml['Resources'][function['function_name']] = {'Type': TYPE,
                                                                      'Properties': {'Handler': function['handler'],

@@ -5,26 +5,43 @@ dump the output files in the folder \results.
 """
 import os
 import sys
+import yaml
 import subprocess
 sys.path.append(r'..\..')
 from scripts.convert_lambda_to_sam_template import convert_lambda_to_sam_template
 
-
 def _runcmd(cmd):
+    print 'Executing command = {0}'.format(cmd)
     x = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    return x.communicate(x.stdout)
+    output = x.communicate(x.stdout)
+    print 'Output = {0}'.format(output)
+    return output
 
 
-def test_sam_cli_s3_event(bucket_name, prefix, template_filepath):
-    cmd = 'sam local generate-event s3 --bucket {0} --key {1} | sam local invoke -t {2}'.format(bucket_name, prefix, template_filepath)
-    print 'Executing command = {0}'.format(cmd)
-    print 'Output = {0}'.format(_runcmd(cmd))
+def _get_sam_template_functions(template_filepath):
+    with open(template_filepath, 'r') as fh:
+        yaml_data = yaml.load(fh.read())
+    return yaml_data['Resources'].keys()
 
 
-def test_sam_cli_events_file(template_filepath, event_filepath):
-    cmd = 'sam local invoke -t {0} -e {1}'.format(template_filepath, event_filepath)
-    print 'Executing command = {0}'.format(cmd)
-    print 'Output = {0}'.format(_runcmd(cmd))
+def invoke_sam_cli_s3_event(bucket_name, prefix, template_filepath, function_id):
+    cmd = 'sam local generate-event s3 --bucket {0} --key {1} | sam local invoke -t {2} {3}'.format(bucket_name, prefix, template_filepath, function_id)
+    _runcmd(cmd)
+
+
+def invoke_sam_cli_events_file(template_filepath, event_filepath, function_id):
+    cmd = 'sam local invoke -t {0} -e {1} {2}'.format(template_filepath, event_filepath, function_id)
+    _runcmd(cmd)
+
+
+def test_sam_cli_s3_event(bucket, prefix, filepath):
+    for function_id in _get_sam_template_functions(filepath):
+        invoke_sam_cli_s3_event(bucket, prefix, filepath, function_id)
+
+
+def test_sam_cli_events_file(filepath, eventsfile):
+    for function_id in _get_sam_template_functions(filepath):
+        invoke_sam_cli_events_file(filepath, eventsfile, function_id)
 
 
 def test_convert_lambda_to_sam_template():
@@ -48,11 +65,10 @@ def test_convert_lambda_to_sam_template():
         input_filepath = os.path.join(os.getcwd(), file)
         assert os.path.exists(file), 'Input yaml file path {0} does not exist!'.format(file)
         output_filepath = convert_lambda_to_sam_template(input_filepath)
-        print 'Input={0}, Output={1}'.format(file, output_filepath)
-
+        print 'Input={0}, Output={1}'.format(input_filepath, output_filepath)
         test_sam_cli_s3_event('mybucket', 'mybucketprefix', output_filepath)
+
         for event_file in test_event_files:
-            #event_filepath = os.path.join(tests_folder, event_file)
             assert os.path.exists(event_file), 'Input event file path {0} does not exist!'.format(event_file)
             test_sam_cli_events_file(output_filepath, event_file)
 
