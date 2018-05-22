@@ -23,10 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da6d8d59-e49f-4995-866f-272c6c665cb8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/scripts/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/convert_lambda_to_sam_template.py" afterPath="$PROJECT_DIR$/scripts/convert_lambda_to_sam_template.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/scripts/test_convert_lambda_to_sam_template.py" afterPath="$PROJECT_DIR$/test/scripts/test_convert_lambda_to_sam_template.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/LambdaExecuteEcsTask.py" afterPath="$PROJECT_DIR$/scripts/LambdaExecuteEcsTask.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py" afterPath="$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,54 +42,25 @@
       <file leaf-file-name="convert_lambda_to_sam_template.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/convert_lambda_to_sam_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/scripts/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="447">
-              <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+              <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LambdaExecuteEcsTask.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/LambdaExecuteEcsTask.py">
+      <file leaf-file-name="test_LambdaExecuteEcsTask.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+            <state relative-caret-position="847">
+              <caret line="134" column="0" lean-forward="true" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#208#217#0" expanded="true" />
+                <element signature="e#914#1307#0" expanded="false" />
+                <element signature="e#1378#2251#0" expanded="false" />
+                <element signature="e#2302#3323#0" expanded="false" />
+                <element signature="e#3397#4983#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mylambdafile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/inputs/mylambdafile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -99,8 +68,8 @@
       <file leaf-file-name="test_convert_lambda_to_sam_template.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/scripts/test_convert_lambda_to_sam_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+            <state relative-caret-position="300">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="17" selection-end-column="17" />
               <folding>
                 <element signature="e#183#192#0" expanded="true" />
               </folding>
@@ -108,34 +77,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_LambdaExecuteEcsTask.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py">
+      <file leaf-file-name="LambdaExecuteEcsTask.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/LambdaExecuteEcsTask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="114" column="26" lean-forward="false" selection-start-line="114" selection-start-column="26" selection-end-line="114" selection-end-column="26" />
+            <state relative-caret-position="350">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
-                <element signature="e#208#217#0" expanded="true" />
+                <element signature="e#0#12#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_lambda_list_0.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/inputs/test_lambda_list_0.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_event.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/inputs/test_event.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="2" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -176,7 +125,6 @@
         <option value="$PROJECT_DIR$/test/tests/test_lambda_list_0.yaml" />
         <option value="$PROJECT_DIR$/test/tests/inputs/mylambdafile.py" />
         <option value="$USER_HOME$/AppData/Local/Temp/Temp1_mylambdafile.zip/mylambdafile.py" />
-        <option value="$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py" />
         <option value="$PROJECT_DIR$/test/inputs/test_lambda_list_1.yaml" />
         <option value="$PROJECT_DIR$/test/inputs/test_lambda_list_0.yaml" />
         <option value="$PROJECT_DIR$/test/inputs/mylambdafile.py" />
@@ -186,6 +134,8 @@
         <option value="$PROJECT_DIR$/test/scripts/test_convert_lambda_to_sam_template.py" />
         <option value="$PROJECT_DIR$/test/scripts/requirements.txt" />
         <option value="$PROJECT_DIR$/scripts/convert_lambda_to_sam_template.py" />
+        <option value="$PROJECT_DIR$/scripts/LambdaExecuteEcsTask.py" />
+        <option value="$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py" />
       </list>
     </option>
   </component>
@@ -912,7 +862,7 @@
       <updated>1526569121764</updated>
       <workItem from="1526569123200" duration="1051000" />
       <workItem from="1526570220505" duration="14929000" />
-      <workItem from="1526766137609" duration="24658000" />
+      <workItem from="1526766137609" duration="33714000" />
     </task>
     <task id="LOCAL-00001" summary="added tests for all, validate all">
       <created>1526860177249</created>
@@ -925,7 +875,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40638000" />
+    <option name="totallyTimeSpent" value="49694000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2869" y="-11" width="2902" height="1582" extended-state="6" />
@@ -1152,65 +1102,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="114" column="26" lean-forward="false" selection-start-line="114" selection-start-column="26" selection-end-line="114" selection-end-column="26" />
-          <folding>
-            <element signature="e#208#217#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/inputs/test_event.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="2" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/inputs/mylambdafile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/scripts/test_convert_lambda_to_sam_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
-          <folding>
-            <element signature="e#183#192#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/inputs/test_lambda_list_0.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/scripts/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -1223,20 +1118,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/scripts/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="22" column="12" lean-forward="true" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/inputs/mylambdafile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="42" lean-forward="false" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/inputs/test_event.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="2" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/convert_lambda_to_sam_template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state relative-caret-position="447">
+          <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/LambdaExecuteEcsTask.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        <state relative-caret-position="350">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/scripts/test_convert_lambda_to_sam_template.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="17" selection-end-column="17" />
+          <folding>
+            <element signature="e#183#192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/scripts/test_LambdaExecuteEcsTask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="847">
+          <caret line="134" column="0" lean-forward="true" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding>
+            <element signature="e#208#217#0" expanded="true" />
+            <element signature="e#914#1307#0" expanded="false" />
+            <element signature="e#1378#2251#0" expanded="false" />
+            <element signature="e#2302#3323#0" expanded="false" />
+            <element signature="e#3397#4983#0" expanded="false" />
           </folding>
         </state>
       </provider>

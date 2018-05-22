@@ -12,7 +12,6 @@ SECURITY_GROUPS
 ASSIGN_PUBLIC_IP
 """
 
-
 def lambda_handler(event, context):
     assert ('Records' in event.keys()) and \
            (event.get('Records')[0].get('s3')), 'Lambda Function is not triggered by an AWS S3 event!'
