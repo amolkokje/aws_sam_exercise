@@ -13,7 +13,7 @@ Feature: Lambda Execute ECS Task
     And Create lambda permissions "testpermissions" for "s3" events from bucket "testbucket"
     And Create iam policy "testpolicy" to allow access to "s3,ecs,logs"
     And Create lambda function "LambdaExecuteEcsTask with permissions "testpermissions" and policy "testpolicy"
-    Given Create "2" dummy tasks and upload file with task arns to bucket "testbucket"
+    And Create "2" dummy tasks and upload file with task arns to bucket "testbucket"
     When I invoke lambda function with events from bucket "testbucket"
     Then I see no errors in cloudWatch logstream '/aws/lambda/LambdaExecuteEcsTask'
     And I see "2" tasks launched in ecs
