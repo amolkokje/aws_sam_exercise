@@ -12,6 +12,13 @@ SECURITY_GROUPS
 ASSIGN_PUBLIC_IP
 """
 
+"""
+NOTE:
+- unable to test using moto after uploading as lambda function
+- able to test using moto by executing the module directly using sample s3 event
+"""
+
+
 def lambda_handler(event, context):
     assert ('Records' in event.keys()) and \
            (event.get('Records')[0].get('s3')), 'Lambda Function is not triggered by an AWS S3 event!'

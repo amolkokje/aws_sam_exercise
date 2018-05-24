@@ -1,7 +1,7 @@
 #!/usr/bin/env
 """
 This is a test script for LambdaExecuteEcsTask.py. The test will mock S3 and store object in the bucket.
-It will then invoke an event for the lambda function for the updated bucket key
+It will then invoke an event for the lambda function for the updated bucket key.
 """
 import os
 import time
@@ -13,38 +13,21 @@ from moto import mock_ecs, mock_s3, mock_lambda, mock_logs
 
 REGION = 'us-east-1'
 
-def test_fake_s3(fakes3_port):
-    """
-    to make this work, start fakes3 server first by executing on command line: fakeS3 server -p <PORT> --root=ROOT
-    :param fakes3_port:
-    :return:
-    """
-    s3_client = boto3.client('s3', aws_access_key_id='a', aws_secret_access_key='b', endpoint_url='http://localhost:{0}'.format(fakes3_port))
-    s3_client.create_bucket(Bucket='fake-bucket')
-    s3_client.create_bucket(Bucket='fake-bucket-1')
-    s3_client.list_buckets()
+
+def _validate_s3_response(response):
+    assert response['ResponseMetadata']['HTTPStatusCode'] == 200, 'Invalid S3 response code: {0}'.format(response)
 
 
 def _upload_file_to_bucket(upload_filepath, bucket, upload_filename):
+    print 'Uploading file "{0}" to bucket "{1}" as "{2}"'.format(upload_filepath, bucket, upload_filename)
     s3_client = boto3.client('s3', region_name=REGION)
     if bucket not in s3_client.list_buckets():
-        response = s3_client.create_bucket(Bucket=bucket)
-        print 'create_bucket response = {}'.format(response)
+        _validate_s3_response(s3_client.create_bucket(Bucket=bucket))
     s3_res = boto3.resource('s3')
-    response = s3_res.meta.client.upload_file(upload_filepath, bucket, upload_filename)
-    print 'upload_file response = {}'.format(response)
+    s3_res.meta.client.upload_file(upload_filepath, bucket, upload_filename)
 
 
 def _create_lambda_function(name, handler, role, code, bucket):
-    """
-
-    :param name:
-    :param handler:
-    :param role:
-    :param code: zipfile containing python code for lambda functions
-    :param bucket:
-    :return:
-    """
     client = boto3.client('lambda', region_name=REGION)
     client.create_function(
         FunctionName=name,
@@ -89,18 +72,41 @@ def _invoke_lambda_function(name, payload):
 
         result = logs_conn.get_log_events(logGroupName='/aws/lambda/{0}'.format(name),
                                           logStreamName=log_streams[0]['logStreamName'])
-        print 'no of events = {}'.format(len(result.get('events')))
-        print 'events = {0}'.format(result.get('events'))
-        return
+        events = result.get('events')
+        print 'no of events={0}, events={1}'.format(len(events), events)
+        break
 
 
-@mock_lambda
-@mock_s3
-@mock_logs
-def test_LambdaExecuteEcsTask():
+def test_fake_s3(fakes3_port):
+    """
+    to make this work, start fakes3 server first by executing on command line: fakeS3 server -p <PORT> --root=ROOT
+    """
+    s3_client = boto3.client('s3', aws_access_key_id='a', aws_secret_access_key='b',
+                             endpoint_url='http://localhost:{0}'.format(fakes3_port))
+    s3_client.create_bucket(Bucket='fake-bucket')
+    s3_client.create_bucket(Bucket='fake-bucket-1')
+    s3_client.list_buckets()
+
+
+def test_lambda_execute_ecs_task(mock=False):
+    """
+    Test for lambda function that creates ecs tasks
+    :param mock: True: tests using moto lib, False: tests using real cloud env (make sure you have your default creds
+    set)
+    :return:
+    """
+    ms3 = mock_s3()
+    ml = mock_lambda()
+    mecs = mock_ecs()
+    mlogs = mock_logs()
+    if mock:
+        ms3.start()
+        ml.start()
+        mecs.start()
+        mlogs.start()
 
     bucket_name = 'testamolbucket'
-    key_name = 'taskarn.list' # path to file that contains task ARNs
+    key_name = 'taskarn.list'  # path to file that contains task ARNs
     script_dir = os.getcwd()
     lambda_function_filepath = r'..\..\scripts'
     lambda_function_file = 'LambdaExecuteEcsTask.py'
@@ -119,7 +125,7 @@ def test_LambdaExecuteEcsTask():
                             lambda_execution_role, lambda_zip_file, bucket_name)
 
     s3_event_payload_data = {'Records': [{
-                                            's3':{
+                                            's3': {
                                                 'object':{'key':'testkey'},
                                                 'bucket':{'name':bucket_name}
                                                 }
@@ -129,9 +135,13 @@ def test_LambdaExecuteEcsTask():
 
     os.chdir(script_dir)
     _upload_file_to_bucket(key_name, bucket_name, key_name)
-    _invoke_lambda_function('testfunction', json.dumps(s3_event_payload_data))
 
+    if not mock:
+        # lambda function which uses boto lib cannot be mocked, but invoking the lambda can be mocked in any case
+        # Note: This lambda function invocation has already been validated in real AWS environment.
+        _invoke_lambda_function('testfunction', json.dumps(s3_event_payload_data))
 
 
 #test_fake_s3(4569)
-test_LambdaExecuteEcsTask()
+test_lambda_execute_ecs_task(mock=True)
+

@@ -1,14 +1,15 @@
 #!/usr/bin/env
 """
-This is a test script for convert_lambda_to_template.py. It will take input YAML files from the folder \tests and
-dump the output files in the folder \results.
+This is a test script for ConvertLambdaToSamTemplate.py. It will take input YAML files from the folder \tests and
+dump the output files in the folder \outputs.
 """
 import os
 import sys
 import yaml
 import subprocess
 sys.path.append(r'..\..')
-from scripts.convert_lambda_to_sam_template import convert_lambda_to_sam_template
+from scripts.ConvertLambdaToSamTemplate import convert_lambda_to_sam_template
+
 
 def _runcmd(cmd):
     print 'Executing command = {0}'.format(cmd)
@@ -25,7 +26,8 @@ def _get_sam_template_functions(template_filepath):
 
 
 def invoke_sam_cli_s3_event(bucket_name, prefix, template_filepath, function_id):
-    cmd = 'sam local generate-event s3 --bucket {0} --key {1} | sam local invoke -t {2} {3}'.format(bucket_name, prefix, template_filepath, function_id)
+    cmd = 'sam local generate-event s3 --bucket {0} --key {1} | sam local ' \
+          'invoke -t {2} {3}'.format(bucket_name, prefix, template_filepath, function_id)
     _runcmd(cmd)
 
 
@@ -35,16 +37,25 @@ def invoke_sam_cli_events_file(template_filepath, event_filepath, function_id):
 
 
 def test_sam_cli_s3_event(bucket, prefix, filepath):
+    """
+    Tests SAM template using S3 events
+    """
     for function_id in _get_sam_template_functions(filepath):
         invoke_sam_cli_s3_event(bucket, prefix, filepath, function_id)
 
 
 def test_sam_cli_events_file(filepath, eventsfile):
+    """
+    Tests SAM template using events file
+    """
     for function_id in _get_sam_template_functions(filepath):
         invoke_sam_cli_events_file(filepath, eventsfile, function_id)
 
 
 def test_convert_lambda_to_sam_template():
+    """
+    Executes tests
+    """
     # this will make sure to change path to \inputs directory which contains test inputs
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     os.chdir(r'..\inputs')
