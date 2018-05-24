@@ -14,15 +14,12 @@ from moto import mock_ecs, mock_s3, mock_lambda, mock_logs
 REGION = 'us-east-1'
 
 
-def _validate_s3_response(response):
-    assert response['ResponseMetadata']['HTTPStatusCode'] == 200, 'Invalid S3 response code: {0}'.format(response)
-
-
 def _upload_file_to_bucket(upload_filepath, bucket, upload_filename):
     print 'Uploading file "{0}" to bucket "{1}" as "{2}"'.format(upload_filepath, bucket, upload_filename)
     s3_client = boto3.client('s3', region_name=REGION)
     if bucket not in s3_client.list_buckets():
-        _validate_s3_response(s3_client.create_bucket(Bucket=bucket))
+        response = s3_client.create_bucket(Bucket=bucket)
+        assert response['ResponseMetadata']['HTTPStatusCode'] == 200, 'Invalid code. Response={0}'.format(response)
     s3_res = boto3.resource('s3')
     s3_res.meta.client.upload_file(upload_filepath, bucket, upload_filename)
 
@@ -57,9 +54,9 @@ def _create_lambda_function(name, handler, role, code, bucket):
 def _invoke_lambda_function(name, payload):
     client = boto3.client('lambda', region_name=REGION)
     result = client.invoke(FunctionName=name, InvocationType='RequestResponse', Payload=payload)
-    print 'StatusCode = {}'.format(result["StatusCode"])
-    print 'LogResult = {}'.format(base64.b64decode(result["LogResult"]).decode('utf-8'))
-    print 'Payload = {}'.format(result["Payload"].read().decode('utf-8'))
+    print 'StatusCode = {0}'.format(result["StatusCode"])
+    print 'LogResult = {0}'.format(base64.b64decode(result["LogResult"]).decode('utf-8'))
+    print 'Payload = {0}'.format(result["Payload"].read().decode('utf-8'))
 
     logs_conn = boto3.client('logs', region_name=REGION)
     start = time.time()

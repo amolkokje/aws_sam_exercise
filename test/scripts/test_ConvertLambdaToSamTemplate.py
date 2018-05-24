@@ -68,8 +68,8 @@ def test_convert_lambda_to_sam_template():
             test_yaml_files.append(file)
         if file.endswith('.json'):
             test_event_files.append(file)
-    print 'Test yaml files = {}'.format(test_yaml_files)
-    print 'Test event files = {}'.format(test_event_files)
+    print 'Test yaml files = {0}'.format(test_yaml_files)
+    print 'Test event files = {1}'.format(test_event_files)
 
     # iterate all tests
     for file in test_yaml_files:
