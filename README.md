@@ -12,5 +12,9 @@ Simple test script created: test\scripts\test_LambdaExecuteEcsTask.py. Execute t
 
 You can use the file test\scripts\requirements.txt to generate your virtualenv or install on your box to run the scripts.
 
+#### Improvements possible
+- LambdaExecuteEcsTask can be changed to take output folder so that by default it does not generate output folder path based on the input template file path. 
+- Can have much cleaner way to test Lambda invocation because currently I am unable to test the lambda function using mock objects. This is because apparently mock_lambda seems to not handle running functions containing boto lib.
+
 
 
